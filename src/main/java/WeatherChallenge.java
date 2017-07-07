@@ -9,18 +9,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-//public class WeatherChallenge {
-//	public static void main(String[] args) {
-//		System.out.println("Enter a zipcode: ");
-//		String zipCode = args[0];
-//		System.out.println("You entered: " + zipCode + "!");
-////        for (String s: args) {
-////            System.out.println(s);
-////        }
-////        System.out.println("Helloxxx World!"); // Display the string.
-//    }
-//}
- 
 public class WeatherChallenge {
  
 	public static void main(String[] args) {
@@ -43,10 +31,7 @@ public class WeatherChallenge {
 		}
 		
 		//GoogleTimeZone - current time zone
-
 		String googleTimeZoneString = callURL("https://maps.googleapis.com/maps/api/timezone/json?location=30.09,-81.72&timestamp=1331161200&key=AIzaSyDA87hL8cmah_2BAtWZ5h9zXr4kSsZYTbM");
-		
-	//	System.out.println("\nOutput: \n" + callURL("https://maps.googleapis.com/maps/api/timezone/json?location=30.09,-81.72&timestamp=1331161200&key=AIzaSyDA87hL8cmah_2BAtWZ5h9zXr4kSsZYTbM"));
 		
 		JSONParser gTzParser = new JSONParser(); 
 		JSONObject googleTimeZoneJson = null;
@@ -59,11 +44,6 @@ public class WeatherChallenge {
 		
 		
 //		Google Elevation - general elevation data
-//		Project Name = Katherine-Ennis
-//		AIzaSyBBJpZIM_9_r_7Ntxno4A-8MZx8nici-gw
-//		by lat and long:
-//		https://maps.googleapis.com/maps/api/elevation/json?locations=30.09,-81.72&key=AIzaSyBBJpZIM_9_r_7Ntxno4A-8MZx8nici-gw
-		
 		String googleElevationString = callURL("https://maps.googleapis.com/maps/api/elevation/json?locations=30.09,-81.72&key=AIzaSyBBJpZIM_9_r_7Ntxno4A-8MZx8nici-gw");
 		
 		System.out.println("\nOutput: \n" + callURL("https://maps.googleapis.com/maps/api/elevation/json?locations=30.09,-81.72&key=AIzaSyBBJpZIM_9_r_7Ntxno4A-8MZx8nici-gw"));
@@ -129,6 +109,7 @@ public class WeatherChallenge {
 		
 		JSONObject parent = gElevObj;
 		JSONArray results = (JSONArray) gElevObj.get("results"); 
+		//TODO
 //		for (Object result : results) {
 //		    System.out.println("Elevation is   " + ((JSONObject) result).get("elevation"));
 //		
