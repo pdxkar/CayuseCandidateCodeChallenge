@@ -4,6 +4,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
 
+import org.json.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -126,16 +127,12 @@ public class WeatherChallenge {
 		System.out.println("Current timezone is ");
 		System.out.println(gtzObj.get("timeZoneName"));
 		
-		JSONObject results = (JSONObject) gElevObj.get("results");	
-		
-		System.out.println("REsults is ");
-		System.out.println(results);
-
-		
-		System.out.println("Elevation is ");
-		System.out.println(results.get("elevation"));
-		
-
+		JSONObject parent = gElevObj;
+		JSONArray results = (JSONArray) gElevObj.get("results"); 
+//		for (Object result : results) {
+//		    System.out.println("Elevation is   " + ((JSONObject) result).get("elevation"));
+//		
+//		}
 
 	}
 }
