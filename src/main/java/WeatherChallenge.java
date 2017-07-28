@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.Console;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
@@ -10,18 +11,23 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class WeatherChallenge {
- 
+
 	public static void main(String[] args) {
-		System.out.println("Enter a zipcode: ");
-		String zipCode = args[0];
+
+		Console c = System.console();
+		if (c == null) {
+			System.err.println("No console.");
+			System.exit(1);
+		}
+
+		String zipCode = c.readLine("Enter a zipcode: ");
 		System.out.println("You entered: " + zipCode + "!");
-		
 		System.out.println("\nOutput: \n" + callURL("http://api.openweathermap.org/data/2.5/weather?zip=32003,us&APPID=6581ca66d71dda19bdd5809073d78c5f"));
 
 		//WeatherMap (City, Latitude, Longitude)
 		String weatherMapString = callURL("http://api.openweathermap.org/data/2.5/weather?zip=32003,us&APPID=6581ca66d71dda19bdd5809073d78c5f");
-		
-		JSONParser wMapParser = new JSONParser(); 
+
+		JSONParser wMapParser = new JSONParser();
 		JSONObject weatherMapJson = null;
 		try {
 			weatherMapJson = (JSONObject) wMapParser.parse(weatherMapString);
@@ -29,11 +35,11 @@ public class WeatherChallenge {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		//GoogleTimeZone - current time zone
 		String googleTimeZoneString = callURL("https://maps.googleapis.com/maps/api/timezone/json?location=30.09,-81.72&timestamp=1331161200&key=AIzaSyDA87hL8cmah_2BAtWZ5h9zXr4kSsZYTbM");
-		
-		JSONParser gTzParser = new JSONParser(); 
+
+		JSONParser gTzParser = new JSONParser();
 		JSONObject googleTimeZoneJson = null;
 		try {
 			googleTimeZoneJson = (JSONObject) gTzParser.parse(googleTimeZoneString);
@@ -41,14 +47,14 @@ public class WeatherChallenge {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
+
 //		Google Elevation - general elevation data
 		String googleElevationString = callURL("https://maps.googleapis.com/maps/api/elevation/json?locations=30.09,-81.72&key=AIzaSyBBJpZIM_9_r_7Ntxno4A-8MZx8nici-gw");
-		
+
 		System.out.println("\nOutput: \n" + callURL("https://maps.googleapis.com/maps/api/elevation/json?locations=30.09,-81.72&key=AIzaSyBBJpZIM_9_r_7Ntxno4A-8MZx8nici-gw"));
-		
-		JSONParser gElevParser = new JSONParser(); 
+
+		JSONParser gElevParser = new JSONParser();
 		JSONObject googleElevJson = null;
 		try {
 			googleElevJson = (JSONObject) gElevParser.parse(googleTimeZoneString);
@@ -58,9 +64,9 @@ public class WeatherChallenge {
 		}
 
 		deserializeWeatherMapJson(weatherMapJson, googleTimeZoneJson, googleElevJson);
-		
+
 	}
- 
+
 	public static String callURL(String myURL) {
 		System.out.println("Requeted URL:" + myURL);
 		StringBuilder sb = new StringBuilder();
@@ -83,36 +89,36 @@ public class WeatherChallenge {
 					bufferedReader.close();
 				}
 			}
-		in.close();
+			in.close();
 		} catch (Exception e) {
 			throw new RuntimeException("Exception while calling URL:"+ myURL, e);
-		} 
- 
+		}
+
 		return sb.toString();
 	}
-	
+
 	public static void deserializeWeatherMapJson(JSONObject wpObj, JSONObject gtzObj, JSONObject gElevObj ){
-	
+
 		System.out.println("City name is ");
 		System.out.println(wpObj.get("name"));
-		
-		JSONObject coordinates = (JSONObject) wpObj.get("coord");		
-		
+
+		JSONObject coordinates = (JSONObject) wpObj.get("coord");
+
 		System.out.println("Longitude is ");
 		System.out.println(coordinates.get("lon"));
-		
+
 		System.out.println("Latitude is ");
 		System.out.println(coordinates.get("lat"));
-		
+
 		System.out.println("Current timezone is ");
 		System.out.println(gtzObj.get("timeZoneName"));
-		
+
 		JSONObject parent = gElevObj;
-		JSONArray results = (JSONArray) gElevObj.get("results"); 
+		JSONArray results = (JSONArray) gElevObj.get("results");
 		//TODO
 //		for (Object result : results) {
 //		    System.out.println("Elevation is   " + ((JSONObject) result).get("elevation"));
-//		
+//
 //		}
 
 	}
