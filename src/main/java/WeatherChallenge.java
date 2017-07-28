@@ -68,7 +68,7 @@ public class WeatherChallenge {
 	}
 
 	public static String callURL(String myURL) {
-		System.out.println("Requeted URL:" + myURL);
+		System.out.println("Requested URL:" + myURL);
 		StringBuilder sb = new StringBuilder();
 		URLConnection urlConn = null;
 		InputStreamReader in = null;
@@ -99,23 +99,17 @@ public class WeatherChallenge {
 
 	public static void deserializeWeatherMapJson(JSONObject wpObj, JSONObject gtzObj, JSONObject gElevObj ){
 
-		System.out.println("City name is ");
-		System.out.println(wpObj.get("name"));
-
 		JSONObject coordinates = (JSONObject) wpObj.get("coord");
 
-		System.out.println("Longitude is ");
-		System.out.println(coordinates.get("lon"));
-
-		System.out.println("Latitude is ");
-		System.out.println(coordinates.get("lat"));
-
-		System.out.println("Current timezone is ");
-		System.out.println(gtzObj.get("timeZoneName"));
+		System.out.println("City name is " + wpObj.get("name"));
+		System.out.println("Longitude is " + coordinates.get("lon"));
+		System.out.println("Latitude is " + coordinates.get("lat"));
+		System.out.println("Current timezone is " + gtzObj.get("timeZoneName"));
 
 		JSONObject parent = gElevObj;
 		JSONArray results = (JSONArray) gElevObj.get("results");
 		//TODO
+
 //		for (Object result : results) {
 //		    System.out.println("Elevation is   " + ((JSONObject) result).get("elevation"));
 //
