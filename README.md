@@ -2,9 +2,6 @@
 
 One Paragraph of project description goes here
 
-####first you have to have java and maven installed locally:
-**brew install maven**
-
 ## Getting Started
 
 **This project is to be executed from the terminal.**
@@ -18,6 +15,8 @@ One Paragraph of project description goes here
 ### Prerequisites
 
 A current copy of Java and maven need to be installed locally.
+
+**brew install maven**
 
 ## Running the tests
 
