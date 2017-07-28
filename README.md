@@ -1,19 +1,19 @@
-# Project Title
+# Cayuse Candidate Code Challenge
 
 One Paragraph of project description goes here
 
-* first you have to have java and maven downloaded:
-brew install maven
+####first you have to have java and maven installed locally:
+**brew install maven**
 
 ## Getting Started
 
-Run the project from the terminal.
-1 - Clone the project into an appropriate folder (ie katherine.ennis/mySanbox_env/): https://github.com/pdxkar/EnvisionsWeatherMapChallenge.git
-2 - run the command: mvn package
-3 - run the command: mvn exec:java -Dexec.mainClass="Main"
-4 - Enter a zipcode for where you want the weather report.
+**This project is to be executed from the terminal.**
+1. Clone the project into an appropriate folder (ex: **user/mySanbox_env/**): https://github.com/pdxkar/EnvisionsWeatherMapChallenge.git
+2. Run the command: **mvn package** 
+3. Run the command: **mvn exec:java -Dexec.mainClass="Main"**
+4. Enter a zipcode for where you want the weather report.
 
-*You might need or want to run the command "mvn clean" before running "mvn package".
+*You might need or want to run the command **mvn clean** before running **mvn package**.
 
 ### Prerequisites
 
