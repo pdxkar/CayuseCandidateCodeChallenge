@@ -35,9 +35,7 @@ public class WeatherChallenge {
 		}
 
 		//GoogleTimeZone - current time zone
-		//String googleTimeZoneString = callURL("https://maps.googleapis.com/maps/api/timezone/json?location=30.09,-81.72&timestamp=1331161200&key=AIzaSyDA87hL8cmah_2BAtWZ5h9zXr4kSsZYTbM");
-
-        String googleTimeZoneString = getTimeZoneUrl(weatherMapJson);
+        String googleTimeZoneString = callURL(getTimeZoneUrl(weatherMapJson));
 
 		JSONParser gTzParser = new JSONParser();
 		JSONObject googleTimeZoneJson = null;
@@ -100,8 +98,8 @@ public class WeatherChallenge {
 	public static String getTimeZoneUrl (JSONObject jsonObject){
         JSONObject coordinates = (JSONObject) jsonObject.get("coord");
 
-        String latitude = (String) coordinates.get("lat");
-        String longitude = (String) coordinates.get("lat");
+        Double latitude = (Double) coordinates.get("lat");
+        Double longitude = (Double) coordinates.get("lon");
 
         System.out.println("Longitude is " + longitude);
         System.out.println("Latitude is " + latitude);
