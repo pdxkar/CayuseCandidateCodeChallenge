@@ -5,7 +5,7 @@ One Paragraph of project description goes here
 ## Getting Started
 
 **This project is to be executed from the terminal.**
-1. Clone the project into an appropriate folder (ex: **user/mySanbox_env/**): https://github.com/pdxkar/EnvisionsWeatherMapChallenge.git
+1. Clone the project into an appropriate folder (ex: **user/mySanbox_env/CayuseCandidateCodeChallenge/**): <br />git clone https://github.com/pdxkar/CayuseCandidateCodeChallenge.git
 2. Run the command: **mvn package** 
 3. Run the command: **mvn exec:java -Dexec.mainClass="Main"**
 4. Enter a zipcode for where you want the weather report.
