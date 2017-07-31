@@ -7,7 +7,7 @@ One Paragraph of project description goes here
 **This project is to be executed from the terminal.**
 1. Clone the project into an appropriate folder (ex: **user/mySanbox_env/CayuseCandidateCodeChallenge/**): <br />git clone https://github.com/pdxkar/CayuseCandidateCodeChallenge.git
 2. Run the command: **mvn package** 
-3. Run the command: **mvn exec:java -Dexec.mainClass="Main"**
+3. Run the command: **mvn exec:java -Dexec.mainClass="WeatherChallenge"**
 4. Enter a zipcode for where you want the weather report.
 
 *You might need or want to run the command **mvn clean** before running **mvn package**.
