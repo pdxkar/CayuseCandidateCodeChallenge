@@ -36,10 +36,10 @@ public class WeatherChallenge {
         System.out.println("*********************************************");
         System.out.println("");
         System.out.println("You entered zipcode " + city.getZipcode() + ".");
-        System.out.println("City name is " + city.getCityName() + ".");
-        System.out.println("Temperature is currently " + Math.round(city.getTemperature()) + " degrees Fahrenheit.");
-        System.out.println("Time Zone name is " + city.getTimeZoneName() + ".");
-        System.out.println("Elevation is " + Math.round(city.getElevation()) + ".");
+        System.out.println(city.getZipcode() + " is located in the city of " + city.getCityName() + ".");
+        System.out.println("The temperature in " + city.getCityName() + " is currently " + Math.round(city.getTemperature()) + " degrees Fahrenheit.");
+        System.out.println("The time zone of " + city.getCityName() + " is " + city.getTimeZoneName() + ".");
+        System.out.println("The elevation of " + city.getCityName() + " is " + Math.round(city.getElevation()) + " meters above sea level.");
         System.out.println("");
         System.out.println("*********************************************");
 
