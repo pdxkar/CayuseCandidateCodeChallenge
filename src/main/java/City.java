@@ -4,7 +4,7 @@ public class City {
     String zipcode;
     Double latitude;
     Double longitude;
-    String timeZone;
+    String timeZoneName;
     Double elevation;
 
     public String getCityName() {
@@ -39,12 +39,12 @@ public class City {
         this.longitude = longitude;
     }
 
-    public String getTimeZone() {
-        return timeZone;
+    public String getTimeZoneName() {
+        return timeZoneName;
     }
 
-    public void setTimeZone(String timeZone) {
-        this.timeZone = timeZone;
+    public void setTimeZoneName(String timeZoneName) {
+        this.timeZoneName = timeZoneName;
     }
 
     public Double getElevation() {

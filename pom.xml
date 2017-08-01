@@ -5,12 +5,19 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>WeatherMapChallenge</name>
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.json/json -->
+         <!--https://mvnrepository.com/artifact/org.json/json-->
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20140107</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.json/json -->
+        <!--<dependency>-->
+            <!--<groupId>org.json</groupId>-->
+            <!--<artifactId>json</artifactId>-->
+            <!--<version>20090211</version>-->
+        <!--</dependency>-->
+
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>

@@ -5,7 +5,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
 
-import org.json.JSONArray;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -13,7 +13,6 @@ import org.json.simple.parser.ParseException;
 public class WeatherChallenge {
 
 	public static void main(String[] args) {
-
 
         City city = new City();
 
@@ -37,8 +36,12 @@ public class WeatherChallenge {
 
 	}
 
-
     public static City useOpenWeatherMapApi(Console c, City city){
+
+        JSONObject coordinates;
+        Double latitude = null;
+        Double longitude = null;
+        String cityName = null;
 
         String zipCode = c.readLine("Enter a zipcode: ");
 
@@ -46,7 +49,7 @@ public class WeatherChallenge {
 
         String weatherMapUrl = "http://api.openweathermap.org/data/2.5/weather?zip=" + zipCode + ",us&APPID=6581ca66d71dda19bdd5809073d78c5f";
 
-        //WeatherMap (City, Latitude, Longitude)
+        //WeatherMap (provides City name, Latitude, Longitude)
         String weatherMapString = callURL(weatherMapUrl);
 
         JSONParser wMapParser = new JSONParser();
@@ -58,12 +61,17 @@ public class WeatherChallenge {
             e.printStackTrace();
         }
 
-        JSONObject coordinates = (JSONObject) weatherMapJson.get("coord");
+        try {
+            coordinates = (JSONObject) weatherMapJson.get("coord");
+            latitude = (Double) coordinates.get("lat");
+            longitude = (Double) coordinates.get("lon");
+            cityName = (String) weatherMapJson.get("name");
 
-        Double latitude = (Double) coordinates.get("lat");
-        Double longitude = (Double) coordinates.get("lon");
+        } catch (Exception e){
+            e.printStackTrace();
+        }
 
-        city.setCityName( (String) weatherMapJson.get("name"));
+        city.setCityName(cityName);
         city.setLatitude(latitude);
         city.setLongitude(longitude);
 
@@ -73,7 +81,8 @@ public class WeatherChallenge {
 
     public static City useGoogleTimeZoneApi(City city){
 
-        //location: a comma-separated lat,lng tuple (eg. location=-33.86,151.20), representing the location to look up
+        String timeZoneName = null;
+
         String timeZoneUrl = "https://maps.googleapis.com/maps/api/timezone/json?location=" + city.getLatitude() + "," + city.getLongitude() + "&timestamp=1331161200&key=AIzaSyDA87hL8cmah_2BAtWZ5h9zXr4kSsZYTbM";
 
         String googleTimeZoneString = callURL(timeZoneUrl);
@@ -87,7 +96,13 @@ public class WeatherChallenge {
             e.printStackTrace();
         }
 
-        city.setTimeZone( (String) googleTimeZoneJson.get("timeZoneName"));
+        try {
+            timeZoneName = (String) googleTimeZoneJson.get("timeZoneName");
+        } catch (Exception e ){
+            e.printStackTrace();
+        }
+
+        city.setTimeZoneName(timeZoneName);
 
         return city;
 
@@ -96,39 +111,41 @@ public class WeatherChallenge {
     public static City useGoogleElevationApi(City city){
 
         String googleElevationUrl = "https://maps.googleapis.com/maps/api/elevation/json?locations=" + city.getLatitude() + "," + city.getLongitude() + "&key=AIzaSyBBJpZIM_9_r_7Ntxno4A-8MZx8nici-gw";
-
-        //		Google Elevation - general elevation data
         String googleElevationString = callURL(googleElevationUrl);
+        JSONParser gElevParser = new JSONParser();
+        JSONObject googleElevJson;
+        JSONObject myJsonObject = null;
 
-        System.out.println("\nElevation Output: \n" + callURL(googleElevationUrl));
+        try {
+            googleElevJson = (JSONObject) gElevParser.parse(googleElevationString);
+            JSONArray array = (JSONArray) googleElevJson.get("results");
+            myJsonObject = (JSONObject) array.get(0);
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
-        //??
-//        JSONParser gElevParser = new JSONParser();
-//        JSONObject googleElevJson = null;
-//        try {
-//            googleElevJson = (JSONObject) gElevParser.parse(googleTimeZoneString);
-//        } catch (ParseException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
+        city.setElevation((Double) myJsonObject.get("elevation"));
 
         return city;
     }
 
     public static void displayCityDetails(City city){
 
+        System.out.println("*********************************************");
+        System.out.println("");
+        System.out.println("You entered zipcode " + city.getZipcode());
         System.out.println("City name is " + city.getCityName());
         System.out.println("Longitude is " + city.getLongitude());
         System.out.println("Latitude is " + city.getLatitude());
-        System.out.println("Time Zone name is " + city.getTimeZone());
-
-        //TODO add elevation info
-        System.out.println("Elevation is .... something.");
+        System.out.println("Time Zone name is " + city.getTimeZoneName());
+        System.out.println("Elevation is " + city.getElevation());
+        System.out.println("");
+        System.out.println("*********************************************");
 
     }
 
 	public static String callURL(String myURL) {
-		//System.out.println("Requested URL:" + myURL);
 		StringBuilder sb = new StringBuilder();
 		URLConnection urlConn = null;
 		InputStreamReader in = null;
