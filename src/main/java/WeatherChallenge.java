@@ -14,6 +14,8 @@ public class WeatherChallenge {
 
 	public static void main(String[] args) {
 
+	    City city = new City();
+
 		Console c = System.console();
 		if (c == null) {
 			System.err.println("No console.");
@@ -21,6 +23,8 @@ public class WeatherChallenge {
 		}
 
 		String zipCode = c.readLine("Enter a zipcode: ");
+
+		city.setZipcode(zipCode);
 
 		//WeatherMap (City, Latitude, Longitude)
 		String weatherMapString = callURL("http://api.openweathermap.org/data/2.5/weather?zip=" + zipCode + ",us&APPID=6581ca66d71dda19bdd5809073d78c5f");
@@ -64,6 +68,16 @@ public class WeatherChallenge {
 		deserializeWeatherMapJson(weatherMapJson, googleTimeZoneJson, googleElevJson);
 
 	}
+
+	public static String buildURL(String[] vars){
+
+	    //in the array there will be 2 - infinity values
+        //the first will be which url is being built
+
+	    String constructedUrl = null;
+
+	    return constructedUrl;
+    }
 
 	public static String callURL(String myURL) {
 		//System.out.println("Requested URL:" + myURL);
