@@ -4,8 +4,10 @@ public class City {
     String zipcode;
     Double latitude;
     Double longitude;
+    Double temperature;
     String timeZoneName;
     Double elevation;
+
 
     public String getCityName() {
         return cityName;
@@ -38,6 +40,10 @@ public class City {
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
+
+    public Double getTemperature() { return temperature;  }
+
+    public void setTemperature(Double temperature) { this.temperature = temperature; }
 
     public String getTimeZoneName() {
         return timeZoneName;

@@ -1,6 +1,10 @@
 # Cayuse Candidate Code Challenge
 
-One Paragraph of project description goes here
+The following APIs were used to retrieve the specified information for a zipcode received as a command line parameter:
+
+api.openweathermap.org => city name, current temperature
+maps.googleapis.com/maps/api/timezone => timezone 
+maps.googleapis.com/maps/api/elevation => elevation
 
 ## Getting Started
 
@@ -8,7 +12,7 @@ One Paragraph of project description goes here
 1. Clone the project into an appropriate folder (ex: **user/mySanbox_env/CayuseCandidateCodeChallenge/**): <br />git clone https://github.com/pdxkar/CayuseCandidateCodeChallenge.git
 2. Run the command: **mvn package** 
 3. Run the command: **mvn exec:java -Dexec.mainClass="WeatherChallenge"**
-4. Enter a zipcode for where you want the weather report.
+4. At the prompt, enter a zipcode and corresponding statistics will be produced.
 
 *You might need or want to run the command **mvn clean** before running **mvn package**.
 
@@ -38,32 +42,14 @@ Explain what these tests test and why
 Give an example
 ```
 
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
 * [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
 
 ## Authors
 
 * **Katherine Ennis**
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
 ## Acknowledgments
 
-* This coding exercise was developed by Cayuse for its candidates to demonstate competency with APIs, JSON, unit testing, and general problem solving.
+* This coding exercise was developed by Cayuse, LLC in order to provide candidates the opportunity to demonstate competency with APIs, JSON, unit testing, and general problem solving.
