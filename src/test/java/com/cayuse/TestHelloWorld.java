@@ -42,12 +42,12 @@ public class TestHelloWorld {
     @Test
     public void test1()  {
         //  create mock
-        HelloWorld helloWorldMock = mock(HelloWorld.class);
-
-        // define return value for method getUniqueId()
-        when(helloWorldMock.getUniqueId()).thenReturn(43);
-
-        // use mock in test....
-        assertEquals(helloWorldMock.getUniqueId(), 43);
+//        HelloWorld helloWorldMock = mock(HelloWorld.class);
+//
+//        // define return value for method getUniqueId()
+//        when(helloWorldMock.getUniqueId()).thenReturn(43);
+//
+//        // use mock in test....
+//        assertEquals(helloWorldMock.getUniqueId(), 43);
     }
 }

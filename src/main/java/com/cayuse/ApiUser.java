@@ -15,12 +15,18 @@ public class ApiUser {
 
    // String weatherMapUrl;
 
-    public static City useOpenWeatherMapApi(City city){
 
-        String weatherMapUrl = "http://api.openweathermap.org/data/2.5/weather?zip=" + city.getZipcode() + ",us&APPID=6581ca66d71dda19bdd5809073d78c5f";
+
+    public static City useOpenWeatherMapApi(City city, Apis apis){
+
+        String weatherMapUrl = apis.getWeatherMapUrl(city.getZipcode());
+
+        //String weatherMapUrl = "http://api.openweathermap.org/data/2.5/weather?zip=" + city.getZipcode() + ",us&APPID=6581ca66d71dda19bdd5809073d78c5f";
 
         //WeatherMap (provides com.cayuse.City name, Latitude, Longitude)
         String weatherMapString = callURL(weatherMapUrl);
+
+       // System.out.println(weatherMapString);
 
 
         JSONParser wMapParser = new JSONParser();
