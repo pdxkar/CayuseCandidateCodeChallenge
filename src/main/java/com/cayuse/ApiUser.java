@@ -1,3 +1,5 @@
+package com.cayuse;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -11,12 +13,15 @@ import java.nio.charset.Charset;
 
 public class ApiUser {
 
+   // String weatherMapUrl;
+
     public static City useOpenWeatherMapApi(City city){
 
         String weatherMapUrl = "http://api.openweathermap.org/data/2.5/weather?zip=" + city.getZipcode() + ",us&APPID=6581ca66d71dda19bdd5809073d78c5f";
 
-        //WeatherMap (provides City name, Latitude, Longitude)
+        //WeatherMap (provides com.cayuse.City name, Latitude, Longitude)
         String weatherMapString = callURL(weatherMapUrl);
+
 
         JSONParser wMapParser = new JSONParser();
 
@@ -42,8 +47,6 @@ public class ApiUser {
 
     public static City useGoogleTimeZoneApi(City city){
 
-        String timeZoneName = null;
-
         String timeZoneUrl = "https://maps.googleapis.com/maps/api/timezone/json?location=" + city.getLatitude() + "," + city.getLongitude() + "&timestamp=1331161200&key=AIzaSyDA87hL8cmah_2BAtWZ5h9zXr4kSsZYTbM";
 
         String googleTimeZoneString = callURL(timeZoneUrl);
@@ -52,13 +55,11 @@ public class ApiUser {
         JSONObject googleTimeZoneJson = null;
         try {
             googleTimeZoneJson = (JSONObject) gTzParser.parse(googleTimeZoneString);
-            timeZoneName = (String) googleTimeZoneJson.get("timeZoneName");
+            city.setTimeZoneName((String) googleTimeZoneJson.get("timeZoneName"));
         } catch (ParseException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
-        city.setTimeZoneName(timeZoneName);
 
         return city;
 
@@ -69,19 +70,15 @@ public class ApiUser {
         String googleElevationUrl = "https://maps.googleapis.com/maps/api/elevation/json?locations=" + city.getLatitude() + "," + city.getLongitude() + "&key=AIzaSyBBJpZIM_9_r_7Ntxno4A-8MZx8nici-gw";
         String googleElevationString = callURL(googleElevationUrl);
         JSONParser gElevParser = new JSONParser();
-        JSONObject googleElevJson;
-        JSONObject elevationJsonObject = null;
 
         try {
-            googleElevJson = (JSONObject) gElevParser.parse(googleElevationString);
+            JSONObject googleElevJson = (JSONObject) gElevParser.parse(googleElevationString);
             JSONArray resultsArray = (JSONArray) googleElevJson.get("results");
-            elevationJsonObject = (JSONObject) resultsArray.get(0);
+            city.setElevation((Double) ((JSONObject) resultsArray.get(0)).get("elevation"));
         } catch (ParseException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
-        city.setElevation((Double) elevationJsonObject.get("elevation"));
 
         return city;
     }
@@ -114,4 +111,14 @@ public class ApiUser {
 
         return sb.toString();
     }
+
+    //getters and setters
+
+//    public String getWeatherMapUrl() {
+//        return weatherMapUrl;
+//    }
+//
+//    public void setWeatherMapUrl(City city) {
+//        this.weatherMapUrl = "http://api.openweathermap.org/data/2.5/weather?zip=" + city.getZipcode() + ",us&APPID=6581ca66d71dda19bdd5809073d78c5f";
+//    }
 }

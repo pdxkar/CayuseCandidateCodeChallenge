@@ -11,16 +11,18 @@ maps.googleapis.com/maps/api/elevation => elevation
 **This project is to be executed from the terminal.**
 1. Clone the project into an appropriate folder (ex: **user/mySanbox_env/CayuseCandidateCodeChallenge/**): <br />git clone https://github.com/pdxkar/CayuseCandidateCodeChallenge.git
 2. Run the command: **mvn package** 
-3. Run the command: **mvn exec:java -Dexec.mainClass="WeatherChallenge"**
+3. Run the command: **mvn exec:java -Dexec.mainClass="com.cayuse.WeatherChallenge"**
 4. At the prompt, enter a zipcode and corresponding statistics will be produced.
 
 *You might need or want to run the command **mvn clean** before running **mvn package**.
 
 ### Prerequisites
 
-A current copy of Java and maven need to be installed locally.
+Java 8 and maven need to be installed locally.
 
-**brew install maven**
+With homebrew:<br />
+**brew install maven** <br />
+**brew install java**
 
 ## Running the tests
 

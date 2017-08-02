@@ -1,3 +1,5 @@
+package com.cayuse;
+
 public class City {
 
     String cityName;

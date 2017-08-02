@@ -1,3 +1,5 @@
+package com.cayuse;
+
 import java.io.Console;
 
 public class WeatherChallenge {
@@ -43,6 +45,10 @@ public class WeatherChallenge {
         System.out.println("");
         System.out.println("*********************************************");
 
+    }
+
+    public static String thisIsATest(){
+        return "This is a test";
     }
 
 }
