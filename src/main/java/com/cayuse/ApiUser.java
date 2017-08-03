@@ -13,7 +13,9 @@ import java.nio.charset.Charset;
 
 public class ApiUser {
 
-    public static City useOpenWeatherMapApi(City city){
+    //String weatherMapString;
+
+    public City useOpenWeatherMapApi(City city){
 
         String weatherMapUrl = WeatherHelper.UrlBuilder.getWeatherMapUrl(city.getZipcode());
 
@@ -31,7 +33,8 @@ public class ApiUser {
             city.setCityName((String) weatherMapJson.get("name"));
             //convert temperature from Kelvin to Fahrenheit
             //(K - 273.15) * 9/5 + 32
-            city.setTemperature(   ((Long) main.get("temp") - 273.15) * 9/5 + 32);
+//            city.setTemperature(   ((Long) main.get("temp") - 273.15) * 9/5 + 32);
+            city.setTemperature(   ((Double) main.get("temp") - 273.15) * 9/5 + 32);
 
         } catch (ParseException e) {
             // TODO Auto-generated catch block
@@ -42,7 +45,7 @@ public class ApiUser {
 
     }
 
-    public static City useGoogleTimeZoneApi(City city){
+    public City useGoogleTimeZoneApi(City city){
 
         String timeZoneUrl = WeatherHelper.UrlBuilder.getTimeZoneUrl(city.getLatitude(), city.getLongitude() );
 
@@ -62,7 +65,7 @@ public class ApiUser {
 
     }
 
-    public static City useGoogleElevationApi(City city){
+    public City useGoogleElevationApi(City city){
 
         String googleElevationUrl = WeatherHelper.UrlBuilder.getElevationUrl(city.getLatitude(), city.getLongitude() );
         String googleElevationString = callURL(googleElevationUrl);
@@ -80,7 +83,7 @@ public class ApiUser {
         return city;
     }
 
-    public static String callURL(String myURL) {
+    public String callURL(String myURL) {
         StringBuilder sb = new StringBuilder();
         URLConnection urlConn = null;
         InputStreamReader in = null;
