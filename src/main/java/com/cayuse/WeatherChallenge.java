@@ -8,7 +8,7 @@ public class WeatherChallenge {
 
         City city = new City();
 
-        Apis apis = new Apis();
+       // Apis apis = new Apis();
 
         ApiUser apiUser = new ApiUser();
 
@@ -23,7 +23,7 @@ public class WeatherChallenge {
         city.setZipcode(zipCode);
 
 		//weatherMap - city, latitude, longitude
-        city = apiUser.useOpenWeatherMapApi(city, apis);
+        city = apiUser.useOpenWeatherMapApi(city);
 
         //GoogleTimeZone - current Time Zone
         city = apiUser.useGoogleTimeZoneApi(city);

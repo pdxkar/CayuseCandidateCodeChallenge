@@ -13,21 +13,12 @@ import java.nio.charset.Charset;
 
 public class ApiUser {
 
-   // String weatherMapUrl;
+    public static City useOpenWeatherMapApi(City city){
 
+        String weatherMapUrl = WeatherHelper.UrlBuilder.getWeatherMapUrl(city.getZipcode());
 
-
-    public static City useOpenWeatherMapApi(City city, Apis apis){
-
-        String weatherMapUrl = apis.getWeatherMapUrl(city.getZipcode());
-
-        //String weatherMapUrl = "http://api.openweathermap.org/data/2.5/weather?zip=" + city.getZipcode() + ",us&APPID=6581ca66d71dda19bdd5809073d78c5f";
-
-        //WeatherMap (provides com.cayuse.City name, Latitude, Longitude)
+        //WeatherMap (provides City name, Latitude, Longitude)
         String weatherMapString = callURL(weatherMapUrl);
-
-       // System.out.println(weatherMapString);
-
 
         JSONParser wMapParser = new JSONParser();
 
@@ -40,7 +31,7 @@ public class ApiUser {
             city.setCityName((String) weatherMapJson.get("name"));
             //convert temperature from Kelvin to Fahrenheit
             //(K - 273.15) * 9/5 + 32
-            city.setTemperature(((Double) main.get("temp") - 273.15) * 9/5 + 32);
+            city.setTemperature(   ((Long) main.get("temp") - 273.15) * 9/5 + 32);
 
         } catch (ParseException e) {
             // TODO Auto-generated catch block
@@ -53,7 +44,7 @@ public class ApiUser {
 
     public static City useGoogleTimeZoneApi(City city){
 
-        String timeZoneUrl = "https://maps.googleapis.com/maps/api/timezone/json?location=" + city.getLatitude() + "," + city.getLongitude() + "&timestamp=1331161200&key=AIzaSyDA87hL8cmah_2BAtWZ5h9zXr4kSsZYTbM";
+        String timeZoneUrl = WeatherHelper.UrlBuilder.getTimeZoneUrl(city.getLatitude(), city.getLongitude() );
 
         String googleTimeZoneString = callURL(timeZoneUrl);
 
@@ -73,7 +64,7 @@ public class ApiUser {
 
     public static City useGoogleElevationApi(City city){
 
-        String googleElevationUrl = "https://maps.googleapis.com/maps/api/elevation/json?locations=" + city.getLatitude() + "," + city.getLongitude() + "&key=AIzaSyBBJpZIM_9_r_7Ntxno4A-8MZx8nici-gw";
+        String googleElevationUrl = WeatherHelper.UrlBuilder.getElevationUrl(city.getLatitude(), city.getLongitude() );
         String googleElevationString = callURL(googleElevationUrl);
         JSONParser gElevParser = new JSONParser();
 
@@ -118,13 +109,4 @@ public class ApiUser {
         return sb.toString();
     }
 
-    //getters and setters
-
-//    public String getWeatherMapUrl() {
-//        return weatherMapUrl;
-//    }
-//
-//    public void setWeatherMapUrl(City city) {
-//        this.weatherMapUrl = "http://api.openweathermap.org/data/2.5/weather?zip=" + city.getZipcode() + ",us&APPID=6581ca66d71dda19bdd5809073d78c5f";
-//    }
 }
